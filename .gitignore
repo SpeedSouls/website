@@ -1,0 +1,9 @@
+node_modules
+postgres-data
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
