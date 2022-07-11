@@ -8,7 +8,7 @@
 	],
 	"directus:extension": {
 		"type": "interface",
-		"path": "../../../extensions/interfaces/slug/index.js",
+		"path": "../api/extensions/interfaces/slug/index.js",
 		"source": "src/index.ts",
 		"host": "^9.13.0"
 	},

@@ -1,0 +1,10 @@
+{
+	"name": "api",
+	"scripts": {
+		"dev": "directus start"
+	},
+	"dependencies": {
+		"@sindresorhus/slugify": "^2.1.0",
+		"directus": "^9.13.0"
+	}
+}
