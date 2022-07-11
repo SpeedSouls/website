@@ -1,3 +1,6 @@
 node_modules
 extensions
 uploads
+
+# ignore codegen types
+types/index.ts

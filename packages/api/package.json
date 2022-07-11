@@ -1,10 +1,16 @@
 {
 	"name": "api",
+	"types": "./types/index.ts",
 	"scripts": {
-		"dev": "directus start"
+		"dev": "directus start",
+		"generate": "graphql-codegen"
 	},
 	"dependencies": {
+		"@graphql-codegen/cli": "^2.8.0",
+		"@graphql-codegen/typescript": "^2.7.1",
+		"@graphql-codegen/typescript-operations": "^2.5.1",
 		"@sindresorhus/slugify": "^2.1.0",
-		"directus": "^9.13.0"
+		"directus": "^9.13.0",
+		"graphql": "^16.5.0"
 	}
 }

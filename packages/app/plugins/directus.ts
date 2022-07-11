@@ -1,10 +1,10 @@
 import { Directus } from '@directus/sdk'
-import { pages, games, sidebar_items } from '@prisma/client'
+import type { Pages, Games, Sidebar_Items } from '@speedsouls/api'
 
 type Colletions = {
-	pages: pages
-	games: games
-	sidebar_items: sidebar_items
+	pages: Pages
+	games: Games
+	sidebar_items: Sidebar_Items
 }
 
 export default defineNuxtPlugin(() => {

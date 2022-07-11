@@ -19,7 +19,9 @@
     "vue-instantsearch": "^4.4.0"
   },
   "devDependencies": {
+    "@speedsouls/api": "../api",
     "@tailwindcss/typography": "^0.5.2",
+    "@types/node": "^18.0.3",
     "autoprefixer": "^10.4.7",
     "daisyui": "^2.17.0",
     "nuxt": "3.0.0-rc.4",
