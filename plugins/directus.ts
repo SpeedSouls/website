@@ -1,12 +1,10 @@
 import { Directus } from '@directus/sdk'
-
-type Page = {
-	id: number
-	body: string
-}
+import { pages, games, sidebar_items } from '@prisma/client'
 
 type Colletions = {
-	page: Page
+	pages: pages
+	games: games
+	sidebar_items: sidebar_items
 }
 
 export default defineNuxtPlugin(() => {

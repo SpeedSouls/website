@@ -106,6 +106,7 @@ model directus_files {
   directus_settings_directus_filesTodirectus_settings_project_logo      directus_settings[] @relation("directus_filesTodirectus_settings_project_logo")
   directus_settings_directus_filesTodirectus_settings_public_background directus_settings[] @relation("directus_filesTodirectus_settings_public_background")
   directus_settings_directus_filesTodirectus_settings_public_foreground directus_settings[] @relation("directus_filesTodirectus_settings_public_foreground")
+  games                                                                 games[]
 }
 
 model directus_flows {
@@ -371,4 +372,54 @@ model directus_webhooks {
   actions     String  @db.VarChar(100)
   collections String  @db.VarChar(255)
   headers     Json?   @db.Json
+}
+
+model pages {
+  id               Int                @id @default(autoincrement())
+  title            String?            @db.VarChar(255)
+  slug             String?            @db.VarChar(255)
+  body             String?
+  game             Int?
+  games            games?             @relation(fields: [game], references: [id], onUpdate: NoAction, map: "pages_game_foreign")
+  pages_pages_tags pages_pages_tags[]
+  sidebar_items    sidebar_items[]
+}
+
+model sidebar_items {
+  id    Int     @id @default(autoincrement())
+  sort  Int?
+  page  Int?
+  title String? @db.VarChar(255)
+  pages pages?  @relation(fields: [page], references: [id], onUpdate: NoAction, map: "sidebar_items_page_foreign")
+}
+
+model categories {
+  id    Int     @id @default(autoincrement())
+  game  Int?
+  name  String? @db.VarChar(255)
+  games games?  @relation(fields: [game], references: [id], onUpdate: NoAction, map: "categories_game_foreign")
+}
+
+model games {
+  id             Int             @id @default(autoincrement())
+  name           String?         @db.VarChar(255)
+  speedruncom    String?         @db.VarChar(255)
+  background     String?         @db.Uuid
+  directus_files directus_files? @relation(fields: [background], references: [id], onUpdate: NoAction, map: "games_background_foreign")
+  categories     categories[]
+  pages          pages[]
+}
+
+model pages_pages_tags {
+  id            Int         @id @default(autoincrement())
+  pages_id      Int?
+  pages_tags_id Int?
+  pages         pages?      @relation(fields: [pages_id], references: [id], onUpdate: NoAction, map: "pages_pages_tags_pages_id_foreign")
+  pages_tags    pages_tags? @relation(fields: [pages_tags_id], references: [id], onUpdate: NoAction, map: "pages_pages_tags_pages_tags_id_foreign")
+}
+
+model pages_tags {
+  id               Int                @id @default(autoincrement())
+  name             String?            @unique(map: "pages_tags_name_unique") @db.VarChar(255)
+  pages_pages_tags pages_pages_tags[]
 }

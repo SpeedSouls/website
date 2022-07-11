@@ -12,8 +12,11 @@ services:
     ports:
       - 5432:5432
 
-  adminer:
-    image: adminer
-    restart: always
+  meili:
+    image: getmeili/meilisearch:v0.27.2
+    environment:
+      MEILI_MASTER_KEY: MASTER_KEY
+    volumes:
+      - ./meili_data:/meili_data
     ports:
-      - 8080:8080
+      - 7700:7700

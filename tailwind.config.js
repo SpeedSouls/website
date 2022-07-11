@@ -7,12 +7,20 @@ module.exports = {
 		`composables/**/*.{js,ts}`,
 		`plugins/**/*.{js,ts}`,
 		`App.{js,ts,vue}`,
-		`app.{js,ts,vue}`
+		`app.{js,ts,vue}`,
 	],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				sans: 'Inter',
+			},
+		},
+	},
+	daisyui: {
+		themes: ['light', 'dark'],
 	},
 	plugins: [
+		require('daisyui'),
 		require('@tailwindcss/typography'),
-	]
+	],
 }
