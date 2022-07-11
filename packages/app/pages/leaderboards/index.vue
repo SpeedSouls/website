@@ -11,22 +11,26 @@ const { data } = $(
 		v-if="data"
 		class="mt-3 grid grid-cols-3 gap-3"
 	>
-		<NuxtLink
+		<div
 			v-for="game in data.data"
 			:key="game.id"
-			:to="`/leaderboards/${game.speedruncom}`"
-			class="card image-full rounded-none bg-base-100 shadow-xl before:!rounded-none"
+			class="aspect-video"
 		>
-			<figure>
-				<img
-					class="object-cover"
-					:src="`http://localhost:8055/assets/${game.background}?height=250`"
-					alt="Shoes"
-				/>
-			</figure>
-			<div class="card-body flex items-center justify-center">
-				<h2 class="card-title">{{ game.name }}</h2>
-			</div>
-		</NuxtLink>
+			<NuxtLink
+				:to="`/leaderboards/${game.speedruncom}`"
+				class="card image-full rounded-none bg-base-100 shadow-xl before:!rounded-none"
+			>
+				<figure>
+					<img
+						class="object-cover"
+						:src="`http://localhost:8055/assets/${game.background}?height=250`"
+						alt="Shoes"
+					/>
+				</figure>
+				<div class="card-body flex items-center justify-center">
+					<h2 class="card-title">{{ game.name }}</h2>
+				</div>
+			</NuxtLink>
+		</div>
 	</div>
 </template>

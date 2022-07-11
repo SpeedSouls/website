@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { games } from '@prisma/client'
+import { Games } from '@speedsouls/api'
 
 const props = defineProps<{
-	speedruncom: games['speedruncom']
+	speedruncom: Games['speedruncom']
 }>()
 
 const { data } = $(
@@ -13,5 +13,3 @@ const { data } = $(
 
 watchEffect(() => console.log(data))
 </script>
-
-

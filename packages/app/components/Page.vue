@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { PartialItem } from '@directus/sdk'
-import { pages } from '@prisma/client'
+import { Pages } from '@speedsouls/api'
 import { templateRef } from '@vueuse/core'
 import slugify from '@sindresorhus/slugify'
 
 const props = defineProps<{
-	page: PartialItem<pages>
+	page: Pages
 }>()
 
 let currentSelection = $ref<HTMLElement>()

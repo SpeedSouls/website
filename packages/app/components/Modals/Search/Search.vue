@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { MeiliSearch, SearchResponse } from 'meilisearch'
-import { onStartTyping, watchPausable, whenever } from '@vueuse/core'
-import { SearchIcon, XIcon } from '@heroicons/vue/solid'
-import { pages } from '.prisma/client'
+import {
+	onStartTyping,
+	useLocalStorage,
+	watchPausable,
+	whenever,
+} from '@vueuse/core'
+import { SearchIcon, XIcon, ReplyIcon } from '@heroicons/vue/solid'
+import { Pages } from '@speedsouls/api'
 import Action from './Action.vue'
 
 const client = new MeiliSearch({
@@ -10,10 +15,25 @@ const client = new MeiliSearch({
 	apiKey: 'MASTER_KEY',
 })
 
-let response = $ref<SearchResponse<pages>>()
+let response = $ref<SearchResponse<Pages>>()
 let query = $ref('')
 let selectedIndex = $ref(0)
 let input = $ref<HTMLInputElement>(null)
+let recent = $(
+	useLocalStorage<Map<Pages['slug'], Pages & { __date: number }>>(
+		'recent-search',
+		new Map()
+	)
+)
+
+const hasQuery = $computed(() => query.length !== 0)
+const currentSource = $computed<Pages[]>(() =>
+	hasQuery
+		? response?.hits ?? []
+		: [...recent.values()].sort((a, b) => b.__date - a.__date)
+)
+
+watchEffect(() => console.log(currentSource))
 
 const props = withDefaults(
 	defineProps<{
@@ -30,13 +50,13 @@ const { pause, resume } = watchPausable(
 		selectedIndex = 0
 
 		const tmp = (await client
-			.index<pages>('pages')
-			.search(value)) as SearchResponse<pages>
+			.index<Pages>('pages')
+			.search(value)) as SearchResponse<Pages>
 
 		if (tmp.query !== value) return
 		response = tmp
 	},
-	{ immediate: true }
+	{ immediate: false }
 )
 
 const emit = defineEmits(['update:open'])
@@ -46,23 +66,23 @@ function close() {
 }
 
 function up() {
-	if (!response) return
+	if (!currentSource.length) return
 	selectedIndex = Math.max(0, selectedIndex - 1)
 }
 
 function down() {
-	if (!response) return
-	selectedIndex = Math.min(response.nbHits - 1, selectedIndex + 1)
+	if (!currentSource.length) return
+	selectedIndex = Math.min(currentSource.length - 1, selectedIndex + 1)
 }
 
 const router = useRouter()
 
 function enter() {
-	const hit = response?.hits?.[selectedIndex]
+	const hit = currentSource[selectedIndex]
 	if (!hit) return
 
 	router.push(`/${hit.slug}`)
-	close()
+	onPageChosen(hit)
 }
 
 function reset() {
@@ -73,6 +93,20 @@ function reset() {
 function onClickOutside() {
 	if (!props.open) return
 	close()
+}
+
+function onPageChosen(page: Pages) {
+	close()
+
+	if (!page.slug) return
+	recent.set(page.slug, {
+		...page,
+		__date: Date.now(),
+	})
+}
+
+function removeRecent(page: Pages) {
+	recent.delete(page.slug)
 }
 
 onStartTyping(() => {
@@ -139,21 +173,45 @@ whenever(
 						class="m-1 h-5 w-5 cursor-pointer hover:text-accent"
 					/>
 				</div>
-				<ul class="menu gap-1">
+				<ul
+					v-if="currentSource.length > 0"
+					class="menu gap-1"
+				>
 					<li
-						v-for="(hit, i) in response?.hits"
+						v-if="!hasQuery"
+						class="menu-title"
+					>
+						<span class="px-0">Recent</span>
+					</li>
+					<li
+						v-for="(page, i) in currentSource"
+						:key="`hit_${page.slug}`"
 						class="rounded border shadow transition-none"
 						:class="{ 'bg-primary text-primary-content': selectedIndex === i }"
 						@mouseenter="selectedIndex = i"
 					>
 						<NuxtLink
-							:to="`/${hit.slug}`"
-							@click="close"
+							class="flex"
+							:to="`/${page.slug}`"
 						>
-							{{ hit.title }}
+							<ReplyIcon
+								v-if="!hasQuery"
+								class="h-4 w-4"
+							/>
+							<span class="flex-grow">
+								{{ page.title }}
+							</span>
+							<button
+								v-if="!hasQuery"
+								class="aspect-square rounded-full hover:outline p-1"
+								@click.prevent="removeRecent(page)"
+							>
+								<XIcon class="ml-auto h-4 w-4" />
+							</button>
 						</NuxtLink>
 					</li>
 				</ul>
+
 				<div
 					v-if="response?.hits.length === 0 && query"
 					class="mb-6 text-center text-base-content/50"
