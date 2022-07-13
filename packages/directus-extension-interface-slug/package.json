@@ -1,5 +1,5 @@
 {
-	"name": "directus-extension-slug",
+	"name": "@speedsouls/directus-extension-interface-slug",
 	"version": "1.0.0",
 	"keywords": [
 		"directus",
@@ -8,10 +8,14 @@
 	],
 	"directus:extension": {
 		"type": "interface",
-		"path": "../api/extensions/interfaces/slug/index.js",
+		"path": "dist/index.js",
 		"source": "src/index.ts",
-		"host": "^9.13.0"
+		"host": "^9.13.0",
+		"hidden": false
 	},
+	"files": [
+    "dist"
+  ],
 	"scripts": {
 		"build": "directus-extension build",
 		"dev": "directus-extension build --no-minify --watch"
