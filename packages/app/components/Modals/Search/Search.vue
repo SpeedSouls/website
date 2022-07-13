@@ -33,8 +33,6 @@ const currentSource = $computed<Pages[]>(() =>
 		: [...recent.values()].sort((a, b) => b.__date - a.__date)
 )
 
-watchEffect(() => console.log(currentSource))
-
 const props = withDefaults(
 	defineProps<{
 		open?: boolean
@@ -170,7 +168,7 @@ whenever(
 					<XIcon
 						v-show="query"
 						@click="reset"
-						class="m-1 h-5 w-5 cursor-pointer hover:text-accent"
+						class="m-1 h-5 w-5 cursor-pointer hover:text-primary"
 					/>
 				</div>
 				<ul

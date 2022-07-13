@@ -1,8 +1,9 @@
 {
-	"name": "api",
+	"name": "@speedsouls/api",
 	"types": "./types/index.ts",
 	"scripts": {
 		"dev": "directus start",
+		"db:pull": "prisma db pull",
 		"generate": "graphql-codegen"
 	},
 	"dependencies": {
@@ -10,7 +11,12 @@
 		"@graphql-codegen/typescript": "^2.7.1",
 		"@graphql-codegen/typescript-operations": "^2.5.1",
 		"@sindresorhus/slugify": "^2.1.0",
+		"@speedsouls/directus-extension-interface-slug": "../directus-extension-interface-slug",
 		"directus": "^9.13.0",
-		"graphql": "^16.5.0"
+		"graphql": "^16.5.0",
+		"pg": "^8.7.3"
+	},
+	"devDependencies": {
+		"prisma": "^4.0.0"
 	}
 }

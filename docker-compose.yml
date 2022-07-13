@@ -7,8 +7,9 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: example
+      PGDATA: /var/lib/postgresql/data/
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data/:rw
     ports:
       - 5432:5432
 
@@ -20,3 +21,9 @@ services:
       - ./data/meilisearch:/meili_data
     ports:
       - 7700:7700
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
