@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MeiliSearch, SearchResponse } from 'meilisearch'
+import { SearchResponse } from 'meilisearch'
 import {
 	onStartTyping,
 	useLocalStorage,
@@ -10,10 +10,7 @@ import { SearchIcon, XIcon, ReplyIcon } from '@heroicons/vue/solid'
 import { Pages } from '@speedsouls/api'
 import Action from './Action.vue'
 
-const client = new MeiliSearch({
-	host: 'http://127.0.0.1:7700',
-	apiKey: 'MASTER_KEY',
-})
+const { $meiliSearch } = useNuxtApp()
 
 let response = $ref<SearchResponse<Pages>>()
 let query = $ref('')
@@ -47,7 +44,7 @@ const { pause, resume } = watchPausable(
 	async (value) => {
 		selectedIndex = 0
 
-		const tmp = (await client
+		const tmp = (await $meiliSearch
 			.index<Pages>('pages')
 			.search(value)) as SearchResponse<Pages>
 

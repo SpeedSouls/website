@@ -9,13 +9,9 @@
   "dependencies": {
     "@directus/sdk": "^10.0.1",
     "@heroicons/vue": "^1.0.6",
-    "@meilisearch/instant-meilisearch": "^0.7.1",
     "@vueuse/components": "^8.7.5",
     "@vueuse/core": "8.9.0",
-    "directus-extension-searchsync": "dimitrov-adrian/directus-extension-searchsync",
-    "meilisearch": "^0.26.0",
-    "prisma": "^4.0.0",
-    "vue-instantsearch": "^4.4.0"
+    "meilisearch": "^0.26.0"
   },
   "devDependencies": {
     "@speedsouls/api": "../api",

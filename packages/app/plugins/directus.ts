@@ -1,4 +1,4 @@
-import { Directus } from '@directus/sdk'
+import { Directus,  } from '@directus/sdk'
 import { Pages, Games, Sidebar_Items } from '@speedsouls/api'
 
 export default defineNuxtPlugin(() => {

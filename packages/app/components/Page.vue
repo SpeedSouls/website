@@ -2,9 +2,10 @@
 import { Pages } from '@speedsouls/api'
 import { templateRef } from '@vueuse/core'
 import slugify from '@sindresorhus/slugify'
+import { PartialItem } from '@directus/sdk'
 
 const props = defineProps<{
-	page: Pages
+	page: PartialItem<Pages>
 }>()
 
 let currentSelection = $ref<HTMLElement>()

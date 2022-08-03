@@ -4,13 +4,13 @@ const config = {
 		host: 'http://localhost:7700',
 		key: 'MASTER_KEY',
 	},
-	reindexOnStart: false,
+	reindexOnStart: true,
 	batchLimit: 100,
 	collections: {
 		pages: {
-			// filter: {
-			// 	status: 'published',
-			// },
+			filter: {
+				status: 'published',
+			},
 			fields: ['title', 'body', 'slug'],
 			transform: (item, { flattenObject, striptags }) => {
 				return {

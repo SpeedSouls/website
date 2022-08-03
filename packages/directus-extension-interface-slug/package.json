@@ -13,9 +13,6 @@
 		"host": "^9.13.0",
 		"hidden": false
 	},
-	"files": [
-    "dist"
-  ],
 	"scripts": {
 		"build": "directus-extension build",
 		"dev": "directus-extension build --no-minify --watch"

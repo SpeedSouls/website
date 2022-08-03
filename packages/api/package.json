@@ -4,6 +4,7 @@
 	"scripts": {
 		"dev": "directus start",
 		"db:pull": "prisma db pull",
+		"index": "directus extension:searchsync index",
 		"generate": "graphql-codegen"
 	},
 	"dependencies": {
@@ -13,6 +14,7 @@
 		"@sindresorhus/slugify": "^2.1.0",
 		"@speedsouls/directus-extension-interface-slug": "../directus-extension-interface-slug",
 		"directus": "^9.13.0",
+		"directus-extension-searchsync": "github:dimitrov-adrian/directus-extension-searchsync",
 		"graphql": "^16.5.0",
 		"pg": "^8.7.3"
 	},
