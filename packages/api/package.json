@@ -3,6 +3,7 @@
 	"types": "./types/index.ts",
 	"scripts": {
 		"dev": "directus start",
+		"start": "directus start",
 		"db:pull": "prisma db pull",
 		"index": "directus extension:searchsync index",
 		"generate": "graphql-codegen"

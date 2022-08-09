@@ -4,7 +4,8 @@
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
 		"dev": "pnpm -r --parallel --filter=./packages/* run dev",
-		"backup": "docker-compose exec -i -e PGPASSWORD=example postgres /usr/bin/pg_dump  -U postgres directus | gzip -9 > postgres-backup.sql.gz "
+		"backup": "docker-compose exec -i -e PGPASSWORD=example postgres /usr/bin/pg_dump  -U postgres directus | gzip -9 > postgres-backup.sql.gz",
+		"api:start": "pnpm -F=api start"
 	},
 	"packageManager": "pnpm@7.5.0"
 }
