@@ -4,11 +4,13 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "start": "node .output/server/index.mjs"
   },
   "dependencies": {
     "@directus/sdk": "^10.0.1",
     "@heroicons/vue": "^1.0.6",
+    "@sindresorhus/slugify": "^2.1.0",
     "@vueuse/components": "^8.7.5",
     "@vueuse/core": "8.9.0",
     "meilisearch": "^0.26.0"

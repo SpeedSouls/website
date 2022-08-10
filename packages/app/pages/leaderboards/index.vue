@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { DIRECTUS_URL } = useRuntimeConfig()
 const { $directus } = useNuxtApp()
 
 const { data } = $(
@@ -19,7 +20,7 @@ const { data } = $(
 		>
 			<img
 				class="object-cover w-full object-center"
-				:src="`http://localhost:8055/assets/${game.background}?height=250`"
+				:src="`${DIRECTUS_URL}/assets/${game.background}?height=250`"
 				alt="Shoes"
 			/>
 			<div

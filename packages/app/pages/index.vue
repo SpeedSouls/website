@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { DIRECTUS_URL } = useRuntimeConfig()
 const { $directus } = useNuxtApp()
 
 definePageMeta({
@@ -26,7 +27,7 @@ const randomGame = $computed(() => {
 	>
 		<img
 			class="max-h-screen min-h-[100vh] w-full scale-105 object-cover opacity-75 blur-sm"
-			:src="`http://localhost:8055/assets/${randomGame?.background}`"
+			:src="`${DIRECTUS_URL}/assets/${randomGame?.background}`"
 			alt=""
 			lazy
 		/>
