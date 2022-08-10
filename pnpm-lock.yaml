@@ -34,6 +34,7 @@ importers:
     specifiers:
       '@directus/sdk': ^10.0.1
       '@heroicons/vue': ^1.0.6
+      '@sindresorhus/slugify': ^2.1.0
       '@speedsouls/api': ../api
       '@tailwindcss/typography': ^0.5.2
       '@types/node': ^18.0.3
@@ -50,6 +51,7 @@ importers:
     dependencies:
       '@directus/sdk': 10.0.1
       '@heroicons/vue': 1.0.6_vue@3.2.37
+      '@sindresorhus/slugify': 2.1.0
       '@vueuse/components': 8.9.1_vue@3.2.37
       '@vueuse/core': 8.9.0_vue@3.2.37
       meilisearch: 0.26.0

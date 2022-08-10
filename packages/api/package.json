@@ -2,8 +2,8 @@
 	"name": "@speedsouls/api",
 	"types": "./types/index.ts",
 	"scripts": {
-		"dev": "directus start",
-		"start": "directus start",
+		"dev": "CONFIG_PATH=\"./.env\" npx directus start",
+		"start": "CONFIG_PATH=\"./railway.config.js\" npx directus start",
 		"db:pull": "prisma db pull",
 		"index": "directus extension:searchsync index",
 		"generate": "graphql-codegen"
